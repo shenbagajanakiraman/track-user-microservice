@@ -1,4 +1,4 @@
-package com.stackroute.config.configserver;
+package com.stackroute.configserver;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
