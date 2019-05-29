@@ -1,4 +1,4 @@
-From openjdk:11-jdk-stretch
+FROM openjdk:11-jdk-stretch
 
 ADD target/musix-service-0.0.1-SNAPSHOT.jar /src/app/music/musix-service-0.0.1-SNAPSHOT.jar
 
