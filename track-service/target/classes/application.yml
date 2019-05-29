@@ -1,5 +1,5 @@
 server:
-  port: 9098
+  port: 8086
 
 eureka:
   instance:
@@ -7,7 +7,7 @@ eureka:
     leaseExpirationDurationInSeconds: 2
   client:
     serviceUrl:
-      defaultZone: http://127.0.0.1:8762/eureka/
+      defaultZone: http://127.0.0.1:8761/eureka/
     healthcheck:
       enabled: true
     lease:
@@ -17,6 +17,16 @@ spring:
   application:
     name: track-service
 
+
+  data:
+    mongodb:
+      repositories:
+        enabled: true
+
+      host: localhost
+
 logging:
   level:
     com.stackroute: DEBUG
+
+driverClassName: com.mongodb.jdbc.MongoDriver

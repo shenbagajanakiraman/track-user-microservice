@@ -2,52 +2,54 @@ package com.stackroute.controller;
 
 
 import com.stackroute.domain.User;
-import com.stackroute.exception.UserAlreadyExistException;
-import com.stackroute.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.stackroute.exceptions.UserAlreadyExistsException;
+import com.stackroute.userservice.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/* @RestController = @Controller + @ResponseBody */
+
+
+
 @RestController
-@RequestMapping(value = "api/v1/userservice")
+
+@RequestMapping (value = "/api/v1")
 public class UserController {
+    UserService userService;
 
+    public UserController(UserService userService)
+    {
 
-  private UserService userService;
-
-  @Autowired
-    public UserController(UserService userService) {
         this.userService = userService;
     }
 
-    @PostMapping
-    public ResponseEntity<?> saveUser(@RequestBody User user){
+
+    //Handler Methods
+
+    @PostMapping ("/user")
+    public ResponseEntity<?> saveUser (@RequestBody User user) {
+
+        System.out.println(user.getAge());
         ResponseEntity responseEntity;
+
         try {
             userService.saveUser(user);
-            responseEntity = new ResponseEntity<String>("Successfully Created", HttpStatus.CREATED);
-        } catch (UserAlreadyExistException e) {
-            System.out.println("msg" + e.getMessage());
-            responseEntity = new ResponseEntity<String>(e.getMessage(),HttpStatus.CONFLICT);
-            e.printStackTrace();
-            }
-
-            //responseEntity = new ResponseEntity<String>("Successfully Created", HttpStatus.CREATED);
-       return responseEntity;
-
+            responseEntity = new ResponseEntity<String> ("Successfully Completed !!!", HttpStatus.CREATED);
+        }
+        catch (UserAlreadyExistsException e) {
+            responseEntity = new ResponseEntity<String> (e.getMessage(),HttpStatus.CONFLICT);
+        }
+        return responseEntity;
     }
 
 
-    @GetMapping
-    public ResponseEntity<?>getAllUser(){
-
-      return new ResponseEntity<List<User>>(userService.getAllUser() , HttpStatus.OK);
+    @GetMapping ("/users")
+    public ResponseEntity<?> getAllUsers() {
+        return new ResponseEntity<List<User>>(userService.getAllUsers(),HttpStatus.OK);
     }
-
-
-
 
 }
+
