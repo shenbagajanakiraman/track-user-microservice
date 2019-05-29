@@ -1,7 +1,7 @@
-From openjdk:11-jdk-stretch
+FROM openjdk:11-jdk-stretch
 
-ADD target/musix-service-0.0.1-SNAPSHOT.jar /src/app/music/musix-service-0.0.1-SNAPSHOT.jar
+ADD target/spring-eureka-client-school-service-0.0.1-SNAPSHOT.jar  /src/app/music/spring-eureka-client-school-service-0.0.1-SNAPSHOT.jar
 
 WORKDIR /src/app/music
 
-ENTRYPOINT ["java","-jar", "musix-service-0.0.1-SNAPSHOT.jar"]
+ENTRYPOINT ["java","-jar", "spring-eureka-client-school-service-0.0.1-SNAPSHOT.jar"]
